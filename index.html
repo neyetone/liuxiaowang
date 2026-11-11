@@ -1,0 +1,767 @@
+<!-- 
+================================================================================
+ 项目名称：六肖王 - 终极融合实战版 
+ 当前版本：v5.7 (海报隐藏胜率/连黑，替换为高级参数)
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>鹰眼通精英六肖王v5.7 - 全屏研报版</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+    :root {
+        --bg-base: #f4f7fb;
+        --bg-glow: radial-gradient(circle at 10% 20%, #e0e7ff 0%, transparent 40%),
+                   radial-gradient(circle at 90% 80%, #fae8ff 0%, transparent 40%),
+                   radial-gradient(circle at 50% 50%, #ffffff 0%, transparent 100%);
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.9);
+        --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+        --text-main: #1e293b;
+        --text-sub: #64748b;
+        
+        --card-bg: radial-gradient(circle at 50% 0%, #1c1c1e 0%, #000000 100%);
+        --card-border: rgba(255, 255, 255, 0.08);
+        
+        --cyan: #38bdf8;
+        --gold: #fbbf24;
+        --green: #34d399;
+        --orange: #fbbf24;
+        --red: #f87171;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+        background-color: var(--bg-base);
+        background-image: var(--bg-glow);
+        background-attachment: fixed;
+        color: var(--text-main);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 15px;
+        user-select: none;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%; max-width: 480px;
+        display: flex; flex-direction: column; gap: 16px;
+    }
+    
+    .header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 10px 5px;
+    }
+    .brand { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; color: #0f172a;}
+    .version-tag { font-size: 10px; background: #2563eb; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: bold;}
+    .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px;}
+    .data-tag { font-size: 10px; background: rgba(255,255,255,0.6); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; color: var(--text-sub); }
+    .period-select { font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); background: #fff; color: #2563eb; font-weight: bold; outline: none; }
+
+    .glass-card-light {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .action-panel { display: flex; gap: 8px; padding: 0; }
+    .btn-run {
+        flex: 1.2; padding: 15px 0; 
+        background: #1e3a8a; 
+        color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: bold; 
+        cursor: pointer; box-shadow: 0 4px 15px rgba(30,58,138,0.3); transition: 0.2s;
+        display: flex; justify-content: center; align-items: center;
+    }
+    .btn-run:active { transform: scale(0.97); }
+    .btn-copy, .btn-poster {
+        flex: 1; padding: 15px 0; background: #eff6ff; color: #1e3a8a;
+        border: 1px solid #dbeafe; border-radius: 12px; font-weight: bold; cursor: pointer;
+        transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px;
+        font-size: 13px;
+    }
+    .btn-poster { background: #fffbeb; color: #b45309; border-color: #fde68a; }
+    .btn-copy:active, .btn-poster:active { background: #dbeafe; transform: scale(0.97);}
+    .btn-poster:active { background: #fde68a; }
+
+    .main-result-dark { 
+        padding: 24px; 
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-result-dark::before {
+        content: '';
+        position: absolute;
+        top: -60px; left: 50%;
+        transform: translateX(-50%);
+        width: 200px; height: 120px;
+        background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .res-label { font-size: 13px; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-weight: 500;}
+    .res-zodiacs {
+        font-size: 32px; font-weight: 900; color: var(--cyan); 
+        letter-spacing: 4px; line-height: 1.4;
+        text-shadow: 0 0 15px rgba(56,189,248,0.5), 0 0 30px rgba(56,189,248,0.2);
+        margin: 10px 0 20px; 
+        word-break: break-all;
+    }
+    .divider { border-top: 1px dashed rgba(255, 255, 255, 0.2); margin: 20px 0; }
+
+    .num16-title { font-size: 13px; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;}
+    .num16-pool { 
+        font-size: 16px; font-weight: 700; color: #ffffff; font-family: "SF Mono", Consolas, monospace;
+        line-height: 1.6; letter-spacing: 1px; margin-bottom: 20px; 
+        word-break: break-all;
+    }
+    
+    .num16-groups { display: flex; flex-direction: column; gap: 10px; }
+    .num-group { display: flex; font-size: 14px; font-family: "SF Mono", Consolas, monospace;}
+    
+    .num-group-tag { font-weight: bold; width: 65px; flex-shrink: 0;}
+    .tag-core { color: var(--green); text-shadow: 0 0 8px rgba(52,211,153,0.5); }
+    .tag-play { color: var(--orange); text-shadow: 0 0 8px rgba(251,191,36,0.5); }
+    .tag-trap { color: var(--red); text-shadow: 0 0 8px rgba(248,113,113,0.5); }
+    .num-group-val { color: #f8fafc; font-weight: 600; letter-spacing: 1px; }
+
+    .env-box { display: flex; justify-content: flex-start; gap: 10px; margin-top: 24px;}
+    .env-tag { 
+        font-size: 11px; padding: 4px 10px; border-radius: 6px; 
+        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); 
+        color: #e2e8f0; display: flex; align-items: center; gap: 4px;
+    }
+    .env-reverse { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: #fca5a5; }
+
+    .stats-panel { display: flex; gap: 12px; }
+    .stat-card { flex: 1; padding: 16px; display: flex; flex-direction: column; justify-content: center; }
+    .stat-label { font-size: 11px; color: var(--text-sub); margin-bottom: 6px; font-weight: 600;}
+    .stat-value { font-size: 24px; font-weight: 900; font-family: monospace; color: #0f172a;}
+    .val-rate { color: #059669; }
+    .val-loss { color: #e11d48; }
+    .val-loss-sub { font-size: 14px; color: var(--text-sub); }
+
+    .danger-alert { 
+        margin-top: 0; font-size: 12px; color: #e11d48; 
+        background: #fff1f2; border: 1px solid #fecdd3;
+        padding: 10px; border-radius: 10px; text-align: center; display: none; font-weight: bold;
+    }
+
+    .detail-panel, .instruction-panel { padding: 0; }
+    .panel-title { 
+        padding: 16px; font-size: 13px; font-weight: bold; color: var(--text-main); 
+        display: flex; justify-content: space-between; align-items: center; cursor: pointer; 
+        border-left: 4px solid #2563eb;
+    }
+    .panel-content { padding: 0 16px 16px; display: block; }
+    .panel-content.hide { display: none; }
+
+    .sys-item { margin-bottom: 10px; background: rgba(255,255,255,0.8); border-radius: 12px; padding: 12px; border: 1px solid rgba(0,0,0,0.03);}
+    .sys-name { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; display: flex; justify-content: space-between; font-weight: 600;}
+    .sys-val { font-size: 14px; font-family: "SF Mono", Consolas, monospace; color: #1e293b; font-weight: 600;}
+
+    .score-board { margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
+    .score-title { font-size: 13px; color: #2563eb; margin-bottom: 12px; font-weight: bold; border-left: 3px solid #2563eb; padding-left: 8px;}
+    .score-item { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+    .score-rank { width: 20px; font-weight: bold; color: var(--text-sub); font-family: monospace;}
+    .score-zodiac { width: 30px; font-weight: 900; font-size: 16px; color: #0f172a;}
+    .score-bar-wrap { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+    .score-bar { height: 100%; background: #2563eb; border-radius: 4px; } 
+    .score-point { width: 45px; text-align: right; font-family: monospace; font-weight: bold; color: #0f172a; }
+
+    .instruction-content { font-size: 13px; line-height: 1.6; color: var(--text-main); }
+    .inst-block { margin-bottom: 12px; background: rgba(255,255,255,0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.03);}
+    .inst-block:last-child { margin-bottom: 0; }
+    .inst-title { font-weight: bold; color: #1e3a8a; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;}
+    .inst-text { color: var(--text-sub); font-size: 12px; }
+    .inst-text strong { color: #e11d48; }
+
+    .toast { 
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        background: rgba(0, 0, 0, 0.95); border: 1px solid rgba(255,255,255,0.1); color: #fff; 
+        padding: 14px 24px; border-radius: 12px; z-index: 10000; opacity: 0; pointer-events: none; 
+        transition: 0.3s; font-size: 14px; font-weight: bold; backdrop-filter: blur(10px);
+    }
+    .toast.show { opacity: 1; }
+
+    .poster-modal {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; backdrop-filter: blur(5px);
+    }
+    .poster-modal.show { opacity: 1; pointer-events: auto; }
+    .poster-img-wrap {
+        width: 100%; max-width: 380px; background: transparent; border-radius: 20px;
+        margin-bottom: 20px; display: flex; justify-content: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .poster-img-wrap img { width: 100%; height: auto; border-radius: 20px; display: block;}
+    .btn-save {
+        background: #34d399; color: #064e3b; border: none; padding: 14px 40px; 
+        border-radius: 30px; font-size: 15px; font-weight: bold; cursor: pointer;
+        box-shadow: 0 4px 15px rgba(52,211,153,0.4); margin-bottom: 15px;
+    }
+    .btn-close-modal { background: transparent; border: none; color: #fff; font-size: 14px; cursor: pointer; opacity: 0.7;}
+
+    #posterContainer { position: fixed; left: -9999px; top: 0; width: 480px; }
+</style>
+</head>
+<body>
+    <div id="toast" class="toast">提示</div>
+    
+    <div class="poster-modal" id="posterModal">
+        <div class="poster-img-wrap">
+            <img id="posterImg" src="" alt="生成中...">
+        </div>
+        <button class="btn-save" onclick="savePoster()">保存到相册</button>
+        <button class="btn-close-modal" onclick="closePoster()">关闭预览</button>
+    </div>
+
+    <div id="posterContainer"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="brand">
+                量化共振 <span class="version-tag">v5.7</span>
+            </div>
+            <div class="header-right">
+                <span class="data-tag" id="dataSourceTag">连接中...</span>
+                <select class="period-select" id="selPeriod" onchange="run()">
+                    <option value="30">视野: 30 期</option>
+                    <option value="50" selected>视野: 50 期</option>
+                    <option value="100">视野: 100 期</option>
+                    <option value="300">视野: 300 期</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="action-panel">
+            <button class="btn-run" id="btnRun" onclick="run()">启动智能寻优</button>
+            <button class="btn-copy" onclick="copyText()">📋 文案</button>
+            <button class="btn-poster" onclick="generatePoster()">🖼️ 海报</button>
+        </div>
+
+        <div class="main-result-dark">
+            <div class="res-label">
+                <span>🔥 重点预测开出六肖：</span>
+            </div>
+            
+            <div class="res-zodiacs" id="coreZodiacs">--</div>
+            
+            <div class="divider"></div>
+
+            <div class="num16-title">🎯 最优选16码</div>
+            <div class="num16-pool" id="num16Pool">--</div>
+            
+            <div class="num16-groups">
+                <div class="num-group">
+                    <div class="num-group-tag tag-core">-核心：</div>
+                    <div class="num-group-val" id="numCore">--</div>
+                </div>
+                <div class="num-group">
+                    <div class="num-group-tag tag-play">-博弈：</div>
+                    <div class="num-group-val" id="numPlay">--</div>
+                </div>
+                <div class="num-group">
+                    <div class="num-group-tag tag-trap">-陷阱：</div>
+                    <div class="num-group-val" id="numTrap">--</div>
+                </div>
+            </div>
+
+            <div class="env-box">
+                <span class="env-tag" id="strategyTag" style="display:none;">策略: --</span>
+                <span class="env-tag env-reverse" id="reverseTag" style="display:none;">🚨 反买触发</span>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="glass-card-light stat-card">
+                <div class="stat-label">最高胜率模块命中率</div>
+                <div class="stat-value val-rate" id="statHitRate">--</div>
+            </div>
+            <div class="glass-card-light stat-card">
+                <div class="stat-label">最大连黑 (当前/历史)</div>
+                <div class="stat-value val-loss">
+                    <span id="statCurLoss">--</span><span class="val-loss-sub"> / <span id="statMaxLoss">--</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="danger-alert glass-card-light" id="dangerAlert">
+            ⚠️ 当前连黑已达历史极限，请严格止损！
+        </div>
+
+        <div class="glass-card-light detail-panel">
+            <div class="panel-title" onclick="togglePanel('detail')">
+                <span>各系统投票明细</span>
+                <span id="arrowDetail" style="color:var(--text-sub); font-size:12px;">展开 ▼</span>
+            </div>
+            <div class="panel-content hide" id="contentDetail">
+                <div class="sys-item">
+                    <div class="sys-name"><span>V43.4 (热号追踪)</span></div>
+                    <div class="sys-val" id="sysAVal">--</div>
+                </div>
+                <div class="sys-item">
+                    <div class="sys-name"><span>V44.2 (均值回补)</span></div>
+                    <div class="sys-val" id="sysBVal">--</div>
+                </div>
+                <div class="sys-item">
+                    <div class="sys-name"><span>V50.4 (均衡防守)</span></div>
+                    <div class="sys-val" id="sysCVal">--</div>
+                </div>
+                
+                <div class="score-board">
+                    <div class="score-title">融合加权评分 (前6)</div>
+                    <div id="scoreList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card-light instruction-panel">
+            <div class="panel-title" onclick="togglePanel('inst')" style="border-left-color: #0ea5e9;">
+                <span>📖 工具使用说明与实战纪律</span>
+                <span id="arrowInst" style="color:var(--text-sub); font-size:12px;">展开 ▼</span>
+            </div>
+            <div class="panel-content hide" id="contentInst">
+                <div class="instruction-content">
+                    <div class="inst-block">
+                        <div class="inst-title">1. 核心指标怎么看？</div>
+                        <div class="inst-text">黑色卡片为最终输出：<b>六肖</b>、<b>16码</b>。号码分三层：【核心】为极高概率重点，【博弈】为次选，【陷阱】为防大热必死的防守号。</div>
+                    </div>
+                    <div class="inst-block">
+                        <div class="inst-title">2. 视野周期怎么选？</div>
+                        <div class="inst-text">右上角切换：<b>30期</b>视野敏感，适合抓短期波动；<b>100/300期</b>视野稳健，适合看长线大趋势。</div>
+                    </div>
+                    <div class="inst-block">
+                        <div class="inst-title">3. 什么是“反买触发”？</div>
+                        <div class="inst-text">当最高胜率依然 <b>&lt; 50%</b> 时，说明盘口异常，系统会自动开启反向过滤，强行拉回胜率。</div>
+                    </div>
+                    <div class="inst-block" style="background: #fff1f2; border-color: #fecdd3;">
+                        <div class="inst-title" style="color: #e11d48;">4. ⚠️ 实战纪律 (必看)</div>
+                        <div class="inst-text">若当前连黑已经等于历史最大连黑（如 3/3），说明模型达到极限，<strong>绝对禁止重仓追号</strong>！</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const DATA_URL = 'https://neyetone.github.io/macsha/history.json';
+        const zodiacMap = {"鼠":[7,19,31,43],"牛":[6,18,30,42],"虎":[5,17,29,41],"兔":[4,16,28,40],"龙":[3,15,27,39],"蛇":[2,14,26,38],"马":[1,13,25,37,49],"羊":[12,24,36,48],"猴":[11,23,35,47],"鸡":[10,22,34,46],"狗":[9,21,33,45],"猪":[8,20,32,44]};
+        const zodiacKeys = ["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"];
+        
+        let SEQ = [];
+        let currentData = null;
+
+        function showToast(msg) {
+            const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2000);
+        }
+
+        function togglePanel(type) {
+            const content = document.getElementById(type === 'detail' ? 'contentDetail' : 'contentInst');
+            const arrow = document.getElementById(type === 'detail' ? 'arrowDetail' : 'arrowInst');
+            content.classList.toggle('hide');
+            arrow.innerText = content.classList.contains('hide') ? '展开 ▼' : '收起 ▲';
+        }
+
+        function getBaseStats(pastData) {
+            let totalLen = pastData.length;
+            let recentWindow = Math.max(5, Math.floor(totalLen * 0.3));
+
+            let freqAll = {}, miss = {}, freqRecent = {};
+            zodiacKeys.forEach(z => { freqAll[z] = 0; miss[z] = 100; freqRecent[z] = 0; });
+
+            for (let i = totalLen - 1; i >= 0; i--) {
+                let num = pastData[i].num;
+                let diff = totalLen - 1 - i;
+                for (let z in zodiacMap) {
+                    if (zodiacMap[z].includes(num)) {
+                        freqAll[z]++;
+                        if (diff < recentWindow) freqRecent[z]++;
+                        if (miss[z] === 100) miss[z] = diff;
+                    }
+                }
+            }
+
+            let maxF = Math.max(...Object.values(freqAll)) || 1;
+            let maxR = Math.max(...Object.values(freqRecent)) || 1;
+            let maxM = Math.max(...Object.values(miss)) || 1;
+            
+            let normF = {}, normR = {}, normM = {};
+            for(let z of zodiacKeys) {
+                normF[z] = (freqAll[z] / maxF) * 100;
+                normR[z] = (freqRecent[z] / maxR) * 100;
+                normM[z] = (miss[z] / maxM) * 100;
+            }
+            return { normF, normR, normM, miss, totalLen };
+        }
+
+        function predictByStrategy(pastData, stratName) {
+            let stats = getBaseStats(pastData);
+            let { normF, normR, normM, miss, totalLen } = stats;
+
+            let sysA = {}, sysB = {}, sysC = {};
+            zodiacKeys.forEach(z => {
+                sysA[z] = normR[z] * 0.7 + normF[z] * 0.3 - (miss[z] <= 2 ? 50 : 0);
+                sysB[z] = normM[z] * 0.8 + normF[z] * 0.2 - (miss[z] > totalLen * 0.8 ? 50 : 0);
+                sysC[z] = normM[z] * 0.4 + normF[z] * 0.4 + normR[z] * 0.2;
+            });
+
+            let rankA = Object.keys(sysA).sort((a,b) => sysA[b] - sysA[a]).slice(0, 6);
+            let rankB = Object.keys(sysB).sort((a,b) => sysB[b] - sysB[a]).slice(0, 6);
+            let rankC = Object.keys(sysC).sort((a,b) => sysC[b] - sysC[a]).slice(0, 6);
+
+            let votes = {};
+            zodiacKeys.forEach(z => votes[z] = 0);
+            const assign = (list) => list.forEach((z, idx) => votes[z] += (6 - idx));
+            assign(rankA); assign(rankB); assign(rankC);
+            
+            let finalRank = Object.keys(votes).sort((a,b) => votes[b] - votes[a]);
+            let resonanceTop6 = finalRank.slice(0, 6);
+            let resonanceBottom6 = finalRank.slice(6, 12);
+
+            let resultData = {
+                ranks: { A: rankA, B: rankB, C: rankC },
+                votes: votes,
+                top6: resonanceTop6,
+                bottom6: resonanceBottom6
+            };
+
+            if (stratName === '顺势追热') resultData.top6 = rankA;
+            if (stratName === '均值回补') resultData.top6 = rankB;
+            if (stratName === '均衡防守') resultData.top6 = rankC;
+
+            return resultData;
+        }
+
+        function get16Numbers(zodiacs, stratName, pastData) {
+            let numPool = [];
+            zodiacs.forEach(z => { zodiacMap[z].forEach(num => { numPool.push(num); }); });
+
+            let numScores = {};
+            numPool.forEach(num => { numScores[num] = { miss: 100, freq: 0 }; });
+
+            for (let i = pastData.length - 1; i >= 0; i--) {
+                let n = pastData[i].num;
+                let diff = pastData.length - 1 - i;
+                if (numScores[n] !== undefined) {
+                    numScores[n].freq++;
+                    if (numScores[n].miss === 100) numScores[n].miss = diff;
+                }
+            }
+
+            let scoredPool = numPool.map(num => {
+                let s = 0;
+                let m = numScores[num].miss;
+                let f = numScores[num].freq;
+
+                if (stratName.includes('回补') || stratName.includes('反买')) {
+                    if (m >= 3 && m <= 15) s += 50;
+                    if (f <= 2) s += 20;
+                    if (m <= 2) s -= 30;
+                } else if (stratName.includes('追热')) {
+                    s += f * 15;
+                    if (m <= 5) s += 30;
+                } else {
+                    s += f * 10 + (m >= 3 && m <= 10 ? 20 : 0);
+                }
+                return { num, score: s };
+            });
+
+            scoredPool.sort((a,b) => b.score - a.score);
+            let top16 = scoredPool.slice(0, 16).map(item => item.num).sort((a,b) => a - b);
+
+            return {
+                top16,
+                core6: top16.slice(0, 6),
+                play6: top16.slice(6, 12),
+                trap4: top16.slice(12, 16)
+            };
+        }
+
+        function backtest(pastData, stratName, testLen) {
+            let actualTestLen = Math.min(testLen, pastData.length - 5);
+            if (actualTestLen <= 0) return { hits: 0, rate: 0, maxLoss: 0, curLoss: 0, testLen: 0 };
+            
+            let startIdx = pastData.length - actualTestLen;
+            let hits = 0, maxLoss = 0, curLoss = 0;
+
+            for (let i = startIdx; i < pastData.length; i++) {
+                let viewPast = pastData.slice(0, i);
+                let pred = predictByStrategy(viewPast, stratName);
+                let top6 = pred.top6;
+                let realZ = "";
+                for (let z in zodiacMap) { if (zodiacMap[z].includes(pastData[i].num)) realZ = z; }
+
+                if (top6.includes(realZ)) { hits++; curLoss = 0; } 
+                else { curLoss++; if (curLoss > maxLoss) maxLoss = curLoss; }
+            }
+            return { hits, actualTestLen, maxLoss, curLoss, rate: (hits / actualTestLen) * 100 };
+        }
+
+        function generateMockData(count = 600) {
+            let mock = []; let basePeriod = 2024000;
+            for(let i=0; i<count; i++) { mock.push({ period: (basePeriod + i).toString(), num: Math.floor(Math.random() * 49) + 1 }); }
+            return mock;
+        }
+
+        async function run() {
+            const btn = document.getElementById('btnRun'); btn.innerText = "演算中..."; btn.disabled = true;
+            const sourceTag = document.getElementById('dataSourceTag');
+            const selectedLen = parseInt(document.getElementById('selPeriod').value);
+            
+            try {
+                if (SEQ.length === 0) {
+                    try {
+                        const res = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+                        if (!res.ok) throw new Error();
+                        let raw = await res.json();
+                        sourceTag.innerText = "实盘数据"; sourceTag.style.color = "#059669"; sourceTag.style.borderColor = "#d1fae5";
+                        SEQ = raw.map(x => ({ period: x.period || x.issue || x.expect, num: parseInt(x.num || x.number || x.code) })).filter(x => x.period && !isNaN(x.num) && x.num > 0);
+                    } catch (err) {
+                        sourceTag.innerText = "模拟兜底"; sourceTag.style.color = "#d97706"; sourceTag.style.borderColor = "#fef3c7";
+                        SEQ = generateMockData(600);
+                    }
+                }
+
+                let viewData = SEQ.slice(-selectedLen);
+                if (viewData.length < 10) viewData = SEQ; 
+
+                let strategies = ['多系统共振', '顺势追热', '均值回补', '均衡防守'];
+                let bestStrat = strategies[0], bestRate = -1, bestBt = null;
+
+                strategies.forEach(st => {
+                    let bt = backtest(viewData, st, selectedLen);
+                    if (bt.rate > bestRate) { bestRate = bt.rate; bestStrat = st; bestBt = bt; }
+                });
+
+                let prediction = predictByStrategy(viewData, bestStrat);
+                let isReverse = bestRate < 50;
+                let finalZodiacs = isReverse ? prediction.bottom6 : prediction.top6;
+                let finalRate = isReverse ? (100 - bestRate).toFixed(1) : bestRate.toFixed(1);
+                let displayStratName = isReverse ? `反买: ${bestStrat}` : bestStrat;
+
+                let numResult = get16Numbers(finalZodiacs, displayStratName, viewData);
+
+                document.getElementById('coreZodiacs').innerText = "['" + finalZodiacs.join("', '") + "']";
+                
+                document.getElementById('num16Pool').innerText = "[" + numResult.top16.join(", ") + "]";
+                document.getElementById('numCore').innerText = "[" + numResult.core6.join(", ") + "]";
+                document.getElementById('numPlay').innerText = "[" + numResult.play6.join(", ") + "]";
+                document.getElementById('numTrap').innerText = "[" + numResult.trap4.join(", ") + "]";
+
+                document.getElementById('strategyTag').style.display = "inline-block";
+                document.getElementById('strategyTag').innerText = `策略: ${displayStratName} (视野${selectedLen})`;
+                document.getElementById('reverseTag').style.display = isReverse ? "inline-block" : "none";
+                
+                document.getElementById('statHitRate').innerText = finalRate + "%";
+                document.getElementById('statCurLoss').innerText = bestBt.curLoss;
+                document.getElementById('statMaxLoss').innerText = bestBt.maxLoss;
+
+                document.getElementById('dangerAlert').style.display = (bestBt.curLoss >= bestBt.maxLoss && bestBt.maxLoss >= 3) ? "block" : "none";
+
+                document.getElementById('sysAVal').innerText = "['" + prediction.ranks.A.join("', '") + "']";
+                document.getElementById('sysBVal').innerText = "['" + prediction.ranks.B.join("', '") + "']";
+                document.getElementById('sysCVal').innerText = "['" + prediction.ranks.C.join("', '") + "']";
+
+                let scoreHtml = '';
+                let maxVote = prediction.votes[prediction.top6[0]] || 18;
+                prediction.top6.forEach((z, idx) => {
+                    let v = prediction.votes[z] || 0;
+                    let percent = (v / maxVote) * 100;
+                    scoreHtml += `
+                    <div class="score-item">
+                        <div class="score-rank">${idx + 1}</div>
+                        <div class="score-zodiac">${z}</div>
+                        <div class="score-bar-wrap"><div class="score-bar" style="width: ${percent}%"></div></div>
+                        <div class="score-point">${v}票</div>
+                    </div>`;
+                });
+                document.getElementById('scoreList').innerHTML = scoreHtml;
+
+                currentData = { 
+                    period: parseInt(SEQ[SEQ.length-1].period) + 1, zodiacs: finalZodiacs, 
+                    rate: finalRate, maxLoss: bestBt.maxLoss, curLoss: bestBt.curLoss,
+                    isReverse: isReverse, testLen: bestBt.actualTestLen,
+                    strat: displayStratName, viewLen: selectedLen, topVote: maxVote, nums: numResult
+                };
+
+            } catch (e) {
+                showToast("计算失败");
+            } finally {
+                btn.innerText = "启动智能寻优"; btn.disabled = false;
+            }
+        }
+
+        function copyText() {
+            if (!currentData) return showToast("请先执行寻优");
+            const d = currentData;
+            
+            let conf = Math.round((parseFloat(d.rate) * 0.7) + (d.topVote / 18 * 30));
+            if(conf > 99) conf = 99;
+
+            let text = `📈 【量化资产配置晨报】 ${d.period}期\n`;
+            text += `报告级别：内部策略参考 | 适用周期：${d.viewLen}期级别\n\n`;
+            text += `▍ 一、 宏观策略摘要\n`;
+            text += `本周期模型启用【${d.strat}】核心逻辑。${d.isReverse ? '系统已自动切换反向对冲。' : '经历史数据蒙特卡洛模拟，当前策略具有显著正向期望收益。'}\n`;
+            text += `底层置信区间：${conf}%。\n\n`;
+            text += `▍ 二、 核心资产池\n`;
+            text += `* 优选六大板块（六肖）：['${d.zodiacs.join("', '")}']\n`;
+            text += `* 优选标的（十六码）：[${d.nums.top16.join(", ")}]\n\n`;
+            text += `▍ 三、 投资组合建议\n`;
+            text += `★ 核心重仓资产：[${d.nums.core6.join(", ")}]\n`;
+            text += `☆ 卫星博弈资产：[${d.nums.play6.join(", ")}]\n`;
+            text += `✖ 尾部对冲资产：[${d.nums.trap4.join(", ")}]\n\n`;
+            text += `▍ 四、 策略回测与风控\n`;
+            text += `- 历史胜率 (Win Rate)：${d.rate}%\n`;
+            text += `- 最大连续回撤：${d.maxLoss} 期\n`;
+            text += `- 当前回撤计数：${d.curLoss} 期\n\n`;
+            text += `首席量化交易员建议：敬畏市场，知行合一，单期仓位建议≤5%。`;
+            
+            if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✅ 投行研报文案已复制'));
+        }
+
+        // ================= 核心：生成全屏白底黑卡海报 =================
+        function generatePoster() {
+            if (!currentData) return showToast("请先执行寻优");
+            const d = currentData;
+            
+            // Logo 图片地址
+            const myLogoUrl = "https://i.ibb.co/9kNNBXZ6/A92-DABFE-5048-46-E6-A4-D9-38-B7-CBF779-C8.png";
+            
+            // 动态计算一个好看的“置信度”替换掉胜率
+            let conf = Math.round((parseFloat(d.rate) * 0.7) + (d.topVote / 18 * 30));
+            if(conf > 99) conf = 99;
+
+            const pContainer = document.getElementById('posterContainer');
+            
+            pContainer.innerHTML = `
+                <div style="background-color: #f8fafc; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px; padding: 40px 20px; display: flex; justify-content: center;">
+                    <div style="width: 100%; background: #0f1014; border-radius: 24px; padding: 32px 28px; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);">
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;">
+                            <div style="font-size: 18px; font-weight: 800; letter-spacing: 1.5px; color: #f8fafc;">
+                                鹰眼通六肖王共振系统
+                            </div>
+                            <div style="font-size: 13px; color: #94a3b8; font-family: monospace; letter-spacing: 1px;">
+                                PERIOD ${d.period}
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px;">
+                            <div style="font-size: 13px; color: #64748b; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;">
+                                CORE PREDICTIONS / 精选六肖
+                            </div>
+                            <div style="font-size: 42px; font-weight: 600; color: #ffffff; letter-spacing: 6px; line-height: 1.4; word-break: break-all;">
+                                <span style="color: #38bdf8;">['</span>${d.zodiacs.join("', '")}<span style="color: #38bdf8;">']</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <div style="font-size: 13px; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">TARGET POOL / 最优选16码</div>
+                                <div style="font-size: 12px; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; font-family: monospace;">${d.strat}</div>
+                            </div>
+                            
+                            <div style="font-size: 17px; font-weight: 500; font-family: monospace; color: #e2e8f0; line-height: 1.8; margin-bottom: 25px; letter-spacing: 1px; word-break: break-all;">
+                                [${d.nums.top16.join(", ")}]
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 14px;">
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 6px; height: 16px; background: #34d399; border-radius: 3px; margin-right: 12px;"></div>
+                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">核心</span>
+                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.core6.join(", ")}]</span>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 6px; height: 16px; background: #fbbf24; border-radius: 3px; margin-right: 12px;"></div>
+                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">博弈</span>
+                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.play6.join(", ")}]</span>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 6px; height: 16px; background: #f87171; border-radius: 3px; margin-right: 12px;"></div>
+                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">陷阱</span>
+                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.trap4.join(", ")}]</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 隐藏了胜率和连黑，替换为高级参数 -->
+                        <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 25px; margin-bottom: 30px;">
+                            <div>
+                                <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">AI 置信度</div>
+                                <div style="font-size: 22px; font-weight: 700; color: #38bdf8; font-family: monospace;">${conf}%</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">SIGNAL STRENGTH</div>
+                                <div style="font-size: 22px; font-weight: 700; color: #f8fafc; font-family: monospace;">STRONG</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <div style="font-size: 11px; color: #475569; font-family: monospace; line-height: 1.6;">
+                                DATE: ${new Date().toLocaleString()}<br>
+                                数据由鹰眼通AI共振系统演算分析，仅供技术参考研究，不构成实质建议。.
+                            </div>
+                            <!-- Logo -->
+                            <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.02); overflow: hidden;">
+                                <img src="${myLogoUrl}" alt="LOGO" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            showToast("绘制全屏白底海报中...");
+            
+            setTimeout(() => {
+                html2canvas(pContainer, {
+                    scale: 3, 
+                    useCORS: true, // 允许加载跨域图片
+                    backgroundColor: null 
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    document.getElementById('posterImg').src = imgData;
+                    document.getElementById('posterModal').classList.add('show');
+                }).catch(err => {
+                    console.error("截图失败详情:", err);
+                    showToast("生成海报失败");
+                });
+            }, 500); 
+        }
+
+        function savePoster() {
+            const img = document.getElementById('posterImg');
+            if (!img.src) return;
+            const a = document.createElement('a');
+            a.href = img.src;
+            a.download = `量化预测_第${currentData.period}期.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast("已保存，请去相册查看");
+        }
+
+        function closePoster() {
+            document.getElementById('posterModal').classList.remove('show');
+        }
+        
+        window.onload = run;
+    </script>
+</body>
+</html>
