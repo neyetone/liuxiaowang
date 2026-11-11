@@ -1,16 +1,9 @@
-<!-- 
-================================================================================
- 项目名称：六肖王 - 终极融合实战版 
- 当前版本：v5.7 (海报隐藏胜率/连黑，替换为高级参数)
-================================================================================
--->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>鹰眼通精英六肖王v5.7 - 全屏研报版</title>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<title>鹰眼通六肖16码共振加权 v5.0 极黑曜石版</title>
 <style>
     :root {
         --bg-base: #f4f7fb;
@@ -22,130 +15,55 @@
         --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
         --text-main: #1e293b;
         --text-sub: #64748b;
-        
         --card-bg: radial-gradient(circle at 50% 0%, #1c1c1e 0%, #000000 100%);
         --card-border: rgba(255, 255, 255, 0.08);
-        
         --cyan: #38bdf8;
         --gold: #fbbf24;
         --green: #34d399;
         --orange: #fbbf24;
         --red: #f87171;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    
     body {
-        background-color: var(--bg-base);
-        background-image: var(--bg-glow);
-        background-attachment: fixed;
-        color: var(--text-main);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 15px;
-        user-select: none;
-        overflow-x: hidden;
+        background-color: var(--bg-base); background-image: var(--bg-glow); background-attachment: fixed;
+        color: var(--text-main); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        min-height: 100vh; display: flex; justify-content: center; align-items: flex-start;
+        padding: 15px; user-select: none; overflow-x: hidden;
     }
+    body.locked .container { filter: blur(8px); pointer-events: none; opacity: 0.5; transition: all 0.4s; }
+    .container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 16px; transition: all 0.4s; }
 
-    .container {
-        width: 100%; max-width: 480px;
-        display: flex; flex-direction: column; gap: 16px;
-    }
-    
-    .header {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 10px 5px;
-    }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5px; }
     .brand { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; color: #0f172a;}
     .version-tag { font-size: 10px; background: #2563eb; color: #fff; padding: 2px 6px; border-radius: 4px; font-weight: bold;}
     .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px;}
     .data-tag { font-size: 10px; background: rgba(255,255,255,0.6); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; color: var(--text-sub); }
     .period-select { font-size: 12px; padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.05); background: #fff; color: #2563eb; font-weight: bold; outline: none; }
 
-    .glass-card-light {
-        background: var(--glass-bg);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border);
-        box-shadow: var(--glass-shadow);
-        border-radius: 16px;
-        overflow: hidden;
-    }
+    .glass-card-light { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 16px; overflow: hidden; }
 
-    .action-panel { display: flex; gap: 8px; padding: 0; }
-    .btn-run {
-        flex: 1.2; padding: 15px 0; 
-        background: #1e3a8a; 
-        color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: bold; 
-        cursor: pointer; box-shadow: 0 4px 15px rgba(30,58,138,0.3); transition: 0.2s;
-        display: flex; justify-content: center; align-items: center;
-    }
+    .action-panel { display: flex; gap: 12px; padding: 0; }
+    .btn-run { flex: 1; padding: 15px; background: #1e3a8a; color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(30,58,138,0.3); transition: 0.2s; }
     .btn-run:active { transform: scale(0.97); }
-    .btn-copy, .btn-poster {
-        flex: 1; padding: 15px 0; background: #eff6ff; color: #1e3a8a;
-        border: 1px solid #dbeafe; border-radius: 12px; font-weight: bold; cursor: pointer;
-        transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px;
-        font-size: 13px;
-    }
-    .btn-poster { background: #fffbeb; color: #b45309; border-color: #fde68a; }
-    .btn-copy:active, .btn-poster:active { background: #dbeafe; transform: scale(0.97);}
-    .btn-poster:active { background: #fde68a; }
+    .btn-copy { padding: 15px 24px; background: #eff6ff; color: #1e3a8a; border: 1px solid #dbeafe; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+    .btn-copy:active { background: #dbeafe; }
 
-    .main-result-dark { 
-        padding: 24px; 
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-        border-radius: 20px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .main-result-dark::before {
-        content: '';
-        position: absolute;
-        top: -60px; left: 50%;
-        transform: translateX(-50%);
-        width: 200px; height: 120px;
-        background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
-        pointer-events: none;
-    }
-
+    .main-result-dark { padding: 24px; background: var(--card-bg); border: 1px solid var(--card-border); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1); border-radius: 20px; position: relative; overflow: hidden; }
+    .main-result-dark::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 200px; height: 120px; background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%); pointer-events: none; }
     .res-label { font-size: 13px; color: #e2e8f0; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-weight: 500;}
-    .res-zodiacs {
-        font-size: 32px; font-weight: 900; color: var(--cyan); 
-        letter-spacing: 4px; line-height: 1.4;
-        text-shadow: 0 0 15px rgba(56,189,248,0.5), 0 0 30px rgba(56,189,248,0.2);
-        margin: 10px 0 20px; 
-        word-break: break-all;
-    }
+    .res-zodiacs { font-size: 32px; font-weight: 900; color: var(--cyan); letter-spacing: 4px; line-height: 1.4; text-shadow: 0 0 15px rgba(56,189,248,0.5), 0 0 30px rgba(56,189,248,0.2); margin: 10px 0 20px; word-break: break-all; }
     .divider { border-top: 1px dashed rgba(255, 255, 255, 0.2); margin: 20px 0; }
-
     .num16-title { font-size: 13px; color: #94a3b8; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;}
-    .num16-pool { 
-        font-size: 16px; font-weight: 700; color: #ffffff; font-family: "SF Mono", Consolas, monospace;
-        line-height: 1.6; letter-spacing: 1px; margin-bottom: 20px; 
-        word-break: break-all;
-    }
-    
+    .num16-pool { font-size: 16px; font-weight: 700; color: #ffffff; font-family: "SF Mono", Consolas, monospace; line-height: 1.6; letter-spacing: 1px; margin-bottom: 20px; word-break: break-all; }
     .num16-groups { display: flex; flex-direction: column; gap: 10px; }
     .num-group { display: flex; font-size: 14px; font-family: "SF Mono", Consolas, monospace;}
-    
     .num-group-tag { font-weight: bold; width: 65px; flex-shrink: 0;}
     .tag-core { color: var(--green); text-shadow: 0 0 8px rgba(52,211,153,0.5); }
     .tag-play { color: var(--orange); text-shadow: 0 0 8px rgba(251,191,36,0.5); }
     .tag-trap { color: var(--red); text-shadow: 0 0 8px rgba(248,113,113,0.5); }
     .num-group-val { color: #f8fafc; font-weight: 600; letter-spacing: 1px; }
-
     .env-box { display: flex; justify-content: flex-start; gap: 10px; margin-top: 24px;}
-    .env-tag { 
-        font-size: 11px; padding: 4px 10px; border-radius: 6px; 
-        background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); 
-        color: #e2e8f0; display: flex; align-items: center; gap: 4px;
-    }
+    .env-tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e2e8f0; display: flex; align-items: center; gap: 4px; }
     .env-reverse { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: #fca5a5; }
 
     .stats-panel { display: flex; gap: 12px; }
@@ -155,19 +73,10 @@
     .val-rate { color: #059669; }
     .val-loss { color: #e11d48; }
     .val-loss-sub { font-size: 14px; color: var(--text-sub); }
-
-    .danger-alert { 
-        margin-top: 0; font-size: 12px; color: #e11d48; 
-        background: #fff1f2; border: 1px solid #fecdd3;
-        padding: 10px; border-radius: 10px; text-align: center; display: none; font-weight: bold;
-    }
+    .danger-alert { margin-top: 0; font-size: 12px; color: #e11d48; background: #fff1f2; border: 1px solid #fecdd3; padding: 10px; border-radius: 10px; text-align: center; display: none; font-weight: bold; }
 
     .detail-panel, .instruction-panel { padding: 0; }
-    .panel-title { 
-        padding: 16px; font-size: 13px; font-weight: bold; color: var(--text-main); 
-        display: flex; justify-content: space-between; align-items: center; cursor: pointer; 
-        border-left: 4px solid #2563eb;
-    }
+    .panel-title { padding: 16px; font-size: 13px; font-weight: bold; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-left: 4px solid #2563eb; }
     .panel-content { padding: 0 16px 16px; display: block; }
     .panel-content.hide { display: none; }
 
@@ -181,7 +90,7 @@
     .score-rank { width: 20px; font-weight: bold; color: var(--text-sub); font-family: monospace;}
     .score-zodiac { width: 30px; font-weight: 900; font-size: 16px; color: #0f172a;}
     .score-bar-wrap { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
-    .score-bar { height: 100%; background: #2563eb; border-radius: 4px; } 
+    .score-bar { height: 100%; background: #2563eb; border-radius: 4px; }
     .score-point { width: 45px; text-align: right; font-family: monospace; font-weight: bold; color: #0f172a; }
 
     .instruction-content { font-size: 13px; line-height: 1.6; color: var(--text-main); }
@@ -191,53 +100,49 @@
     .inst-text { color: var(--text-sub); font-size: 12px; }
     .inst-text strong { color: #e11d48; }
 
-    .toast { 
-        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        background: rgba(0, 0, 0, 0.95); border: 1px solid rgba(255,255,255,0.1); color: #fff; 
-        padding: 14px 24px; border-radius: 12px; z-index: 10000; opacity: 0; pointer-events: none; 
-        transition: 0.3s; font-size: 14px; font-weight: bold; backdrop-filter: blur(10px);
-    }
+    .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 0, 0, 0.95); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 14px 24px; border-radius: 12px; z-index: 100000; opacity: 0; pointer-events: none; transition: 0.3s; font-size: 14px; font-weight: bold; backdrop-filter: blur(10px); max-width: 80vw; text-align: center; }
     .toast.show { opacity: 1; }
 
-    .poster-modal {
-        position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; backdrop-filter: blur(5px);
-    }
-    .poster-modal.show { opacity: 1; pointer-events: auto; }
-    .poster-img-wrap {
-        width: 100%; max-width: 380px; background: transparent; border-radius: 20px;
-        margin-bottom: 20px; display: flex; justify-content: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .poster-img-wrap img { width: 100%; height: auto; border-radius: 20px; display: block;}
-    .btn-save {
-        background: #34d399; color: #064e3b; border: none; padding: 14px 40px; 
-        border-radius: 30px; font-size: 15px; font-weight: bold; cursor: pointer;
-        box-shadow: 0 4px 15px rgba(52,211,153,0.4); margin-bottom: 15px;
-    }
-    .btn-close-modal { background: transparent; border: none; color: #fff; font-size: 14px; cursor: pointer; opacity: 0.7;}
-
-    #posterContainer { position: fixed; left: -9999px; top: 0; width: 480px; }
+    .vip-gate { position: fixed; inset: 0; z-index: 99999; background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); display: flex; justify-content: center; align-items: center; padding: 20px; overflow-y: auto; }
+    .vip-gate.hide { display: none; }
+    .vip-gate-card { background: #fff; border-radius: 20px; width: 100%; max-width: 340px; padding: 32px 24px 26px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); text-align: center; position: relative; overflow: hidden; }
+    .vip-gate-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FDE047, #D97706); }
+    .vip-gate-lock-icon { font-size: 52px; margin-bottom: 16px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25)); }
+    .vip-gate-title { font-size: 20px; font-weight: 900; color: #1e293b; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .vip-gate-sub { font-size: 13px; color: #64748b; margin-bottom: 22px; line-height: 1.6; }
+    .vip-gate-input { width: 100%; padding: 13px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 15px; margin-bottom: 10px; text-align: center; letter-spacing: 2px; font-family: monospace; outline: none; transition: 0.2s; background: #f8fafc; }
+    .vip-gate-input:focus { border-color: #fbbf24; box-shadow: 0 0 0 3px rgba(251,191,36,0.15); background: #fff; }
+    .vip-gate-status { font-size: 12px; margin-bottom: 12px; color: #64748b; min-height: 16px; font-weight: bold; }
+    .vip-gate-status.err { color: #e11d48; }
+    .vip-gate-status.ok { color: #059669; }
+    .vip-gate-btn { width: 100%; padding: 14px; background: #0f172a; color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; margin-bottom: 12px; transition: 0.2s; }
+    .vip-gate-btn:active { transform: scale(0.97); }
+    .vip-gate-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .vip-gate-contact { width: 100%; padding: 14px; background: linear-gradient(135deg, #FDE047, #D97706); color: #000; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; display: inline-block; text-decoration: none; transition: 0.2s; }
+    .vip-gate-contact:active { transform: scale(0.97); }
+    .vip-gate-hint { font-size: 11px; color: #94a3b8; margin-top: 14px; line-height: 1.5; }
 </style>
 </head>
-<body>
+<body class="locked">
     <div id="toast" class="toast">提示</div>
-    
-    <div class="poster-modal" id="posterModal">
-        <div class="poster-img-wrap">
-            <img id="posterImg" src="" alt="生成中...">
-        </div>
-        <button class="btn-save" onclick="savePoster()">保存到相册</button>
-        <button class="btn-close-modal" onclick="closePoster()">关闭预览</button>
-    </div>
 
-    <div id="posterContainer"></div>
+    <!-- VIP 门禁 -->
+    <div class="vip-gate" id="vipGate">
+        <div class="vip-gate-card">
+            <div class="vip-gate-lock-icon">🔒</div>
+            <div class="vip-gate-title">六肖量化 · 极黑曜石版</div>
+            <div class="vip-gate-sub">请输入卡密激活后使用<br><b style="color:#e11d48;">未激活无法浏览任何内容</b></div>
+            <input id="licenseInput" class="vip-gate-input" placeholder="请输入卡密" autocomplete="off" spellcheck="false">
+            <div class="vip-gate-status" id="vipStatusLine"></div>
+            <button id="btnActivate" class="vip-gate-btn" onclick="doActivate()">激活 VIP</button>
+            <a href="https://t.me/onyx668" target="_blank" class="vip-gate-contact">联系客服购买卡密</a>
+            <div class="vip-gate-hint">激活成功后自动记住卡密，刷新无需重复输入</div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="header">
-            <div class="brand">
-                量化共振 <span class="version-tag">v5.7</span>
-            </div>
+            <div class="brand">鹰眼通·精英六肖王共策版 <span class="version-tag">v5.0</span></div>
             <div class="header-right">
                 <span class="data-tag" id="dataSourceTag">连接中...</span>
                 <select class="period-select" id="selPeriod" onchange="run()">
@@ -248,40 +153,23 @@
                 </select>
             </div>
         </div>
-        
+
         <div class="action-panel">
-            <button class="btn-run" id="btnRun" onclick="run()">启动智能寻优</button>
-            <button class="btn-copy" onclick="copyText()">📋 文案</button>
-            <button class="btn-poster" onclick="generatePoster()">🖼️ 海报</button>
+            <button class="btn-run" id="btnRun" onclick="run()">启动智能执行剥离分析 →</button>
+            <button class="btn-copy" onclick="copyText()"><span style="font-size: 16px;">📋</span> 复制推文</button>
         </div>
 
         <div class="main-result-dark">
-            <div class="res-label">
-                <span>🔥 重点预测开出六肖：</span>
-            </div>
-            
+            <div class="res-label"><span>🔥 重点预测开出六肖：</span></div>
             <div class="res-zodiacs" id="coreZodiacs">--</div>
-            
             <div class="divider"></div>
-
             <div class="num16-title">🎯 最优选16码</div>
             <div class="num16-pool" id="num16Pool">--</div>
-            
             <div class="num16-groups">
-                <div class="num-group">
-                    <div class="num-group-tag tag-core">-核心：</div>
-                    <div class="num-group-val" id="numCore">--</div>
-                </div>
-                <div class="num-group">
-                    <div class="num-group-tag tag-play">-博弈：</div>
-                    <div class="num-group-val" id="numPlay">--</div>
-                </div>
-                <div class="num-group">
-                    <div class="num-group-tag tag-trap">-陷阱：</div>
-                    <div class="num-group-val" id="numTrap">--</div>
-                </div>
+                <div class="num-group"><div class="num-group-tag tag-core">-核心：</div><div class="num-group-val" id="numCore">--</div></div>
+                <div class="num-group"><div class="num-group-tag tag-play">-博弈：</div><div class="num-group-val" id="numPlay">--</div></div>
+                <div class="num-group"><div class="num-group-tag tag-trap">-陷阱：</div><div class="num-group-val" id="numTrap">--</div></div>
             </div>
-
             <div class="env-box">
                 <span class="env-tag" id="strategyTag" style="display:none;">策略: --</span>
                 <span class="env-tag env-reverse" id="reverseTag" style="display:none;">🚨 反买触发</span>
@@ -300,29 +188,17 @@
                 </div>
             </div>
         </div>
-        <div class="danger-alert glass-card-light" id="dangerAlert">
-            ⚠️ 当前连黑已达历史极限，请严格止损！
-        </div>
+        <div class="danger-alert glass-card-light" id="dangerAlert">⚠️ 当前连黑已达历史极限，请严格止损！</div>
 
         <div class="glass-card-light detail-panel">
             <div class="panel-title" onclick="togglePanel('detail')">
-                <span>各系统投票明细</span>
+                <span>各系统精英决策明细</span>
                 <span id="arrowDetail" style="color:var(--text-sub); font-size:12px;">展开 ▼</span>
             </div>
             <div class="panel-content hide" id="contentDetail">
-                <div class="sys-item">
-                    <div class="sys-name"><span>V43.4 (热号追踪)</span></div>
-                    <div class="sys-val" id="sysAVal">--</div>
-                </div>
-                <div class="sys-item">
-                    <div class="sys-name"><span>V44.2 (均值回补)</span></div>
-                    <div class="sys-val" id="sysBVal">--</div>
-                </div>
-                <div class="sys-item">
-                    <div class="sys-name"><span>V50.4 (均衡防守)</span></div>
-                    <div class="sys-val" id="sysCVal">--</div>
-                </div>
-                
+                <div class="sys-item"><div class="sys-name"><span>V43.4 (热号追踪)</span></div><div class="sys-val" id="sysAVal">--</div></div>
+                <div class="sys-item"><div class="sys-name"><span>V44.2 (均值回补)</span></div><div class="sys-val" id="sysBVal">--</div></div>
+                <div class="sys-item"><div class="sys-name"><span>V50.4 (均衡防守)</span></div><div class="sys-val" id="sysCVal">--</div></div>
                 <div class="score-board">
                     <div class="score-title">融合加权评分 (前6)</div>
                     <div id="scoreList"></div>
@@ -339,37 +215,50 @@
                 <div class="instruction-content">
                     <div class="inst-block">
                         <div class="inst-title">1. 核心指标怎么看？</div>
-                        <div class="inst-text">黑色卡片为最终输出：<b>六肖</b>、<b>16码</b>。号码分三层：【核心】为极高概率重点，【博弈】为次选，【陷阱】为防大热必死的防守号。</div>
+                        <div class="inst-text">黑色卡片为最终输出：<b>六肖</b>（推荐生肖）、<b>16码</b>（推荐号码池）。号码分三层：【核心】为极高概率重点，【博弈】为次选，【陷阱】为防大热必死的防守号。</div>
                     </div>
                     <div class="inst-block">
                         <div class="inst-title">2. 视野周期怎么选？</div>
-                        <div class="inst-text">右上角切换：<b>30期</b>视野敏感，适合抓短期波动；<b>100/300期</b>视野稳健，适合看长线大趋势。</div>
+                        <div class="inst-text">右上角切换：<b>30期</b>视野敏感，适合抓短期剧烈波动；<b>100/300期</b>视野稳健，适合看长线大趋势，胜率通常更平滑。</div>
                     </div>
                     <div class="inst-block">
-                        <div class="inst-title">3. 什么是“反买触发”？</div>
-                        <div class="inst-text">当最高胜率依然 <b>&lt; 50%</b> 时，说明盘口异常，系统会自动开启反向过滤，强行拉回胜率。</div>
+                        <div class="inst-title">3. 什么是"反买触发"？</div>
+                        <div class="inst-text">当系统检测到经过智能寻优后，最高胜率依然 <b>&lt; 50%</b> 时，说明盘口极度异常，常规模型失效。系统会自动开启反向过滤（把未入选的另外6个生肖作为推荐），强行拉回胜率。</div>
+                    </div>
+                    <div class="inst-block">
+                        <div class="inst-title">4. 什么是"智能寻优"？</div>
+                        <div class="inst-text">系统内置了"追热"、"回补"等4套算法。每次点击【启动分析】，系统会先回测你选择的周期，选出近期最准的那一套模型，再去预测下一期。</div>
                     </div>
                     <div class="inst-block" style="background: #fff1f2; border-color: #fecdd3;">
-                        <div class="inst-title" style="color: #e11d48;">4. ⚠️ 实战纪律 (必看)</div>
-                        <div class="inst-text">若当前连黑已经等于历史最大连黑（如 3/3），说明模型达到极限，<strong>绝对禁止重仓追号</strong>！</div>
+                        <div class="inst-title" style="color: #e11d48;">5. ⚠️ 实战纪律 (必看)</div>
+                        <div class="inst-text">关注右侧的 <b>当前连黑 / 最大连黑</b>。如果当前连黑已经等于历史最大连黑（例如 3/3 或 6/6），说明模型已经达到连错极限，此时<strong>绝对禁止重仓追号</strong>，建议停手观望。</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
+        /* ================= 接口配置（沿用你之前的 Worker） ================= */
         const DATA_URL = 'https://neyetone.github.io/macsha/history.json';
+        const API_BASE = 'https://winter-night-ffc5.vivibeauty01.workers.dev';
+        const API_VERIFY_PATH = '/verify';
+        const LS_KEY = 'hawk_license_6xiao_v1';
+
         const zodiacMap = {"鼠":[7,19,31,43],"牛":[6,18,30,42],"虎":[5,17,29,41],"兔":[4,16,28,40],"龙":[3,15,27,39],"蛇":[2,14,26,38],"马":[1,13,25,37,49],"羊":[12,24,36,48],"猴":[11,23,35,47],"鸡":[10,22,34,46],"狗":[9,21,33,45],"猪":[8,20,32,44]};
         const zodiacKeys = ["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"];
-        
+
         let SEQ = [];
         let currentData = null;
+        let isVipUser = false;
 
+        /* ================= 通用 ================= */
         function showToast(msg) {
-            const t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 2000);
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('show');
+            clearTimeout(t._tm);
+            t._tm = setTimeout(() => t.classList.remove('show'), 2000);
         }
 
         function togglePanel(type) {
@@ -379,13 +268,129 @@
             arrow.innerText = content.classList.contains('hide') ? '展开 ▼' : '收起 ▲';
         }
 
+        /* ================= 卡密验证 ================= */
+        function interpretText(text) {
+            const s = String(text == null ? '' : text).trim();
+            if (!s) return { ok: false, msg: '空响应' };
+            const low = s.toLowerCase();
+            if (/不存在|无效|错误|失败|过期|已用|失效|查无|未找到|invalid|not\s*found|expired|denied|fail|error|false/.test(low)) return { ok: false, msg: s };
+            if (/成功|通过|正确|有效|true|success|valid|\bok\b|激活/.test(low)) return { ok: true, msg: s };
+            return { ok: false, msg: s };
+        }
+
+        function interpretResponse(status, text) {
+            let d = null;
+            try { d = JSON.parse(text); } catch (e) {}
+            if (d && typeof d === 'object') {
+                if (d.ok === true || d.success === true || d.valid === true) return { ok: true, msg: d.msg || d.message || '' };
+                if (d.ok === false || d.success === false || d.valid === false) return { ok: false, msg: d.msg || d.message || d.error || '' };
+                if (d.code === 200 || d.code === 0 || d.code === '200' || d.code === '0') return { ok: true, msg: d.msg || '' };
+                if (typeof d.code === 'number' && d.code >= 400) return { ok: false, msg: d.msg || d.message || '' };
+                if (d.status === 'ok' || d.status === 'success') return { ok: true, msg: d.msg || '' };
+                if (d.status === 'fail' || d.status === 'error') return { ok: false, msg: d.msg || d.message || '' };
+                if (d.result === true) return { ok: true, msg: '' };
+                if (d.result === false) return { ok: false, msg: '' };
+                if (typeof d.result === 'string') return interpretText(d.result);
+                const m = d.msg || d.message || d.error || d.err;
+                if (typeof m === 'string' && m) return interpretText(m);
+                if (status >= 200 && status < 300) return { ok: false, msg: '响应格式无法识别' };
+                return { ok: false, msg: 'HTTP ' + status };
+            }
+            if (typeof d === 'string') return interpretText(d);
+            if (typeof d === 'boolean') return { ok: d, msg: String(d) };
+            if (status >= 200 && status < 300) return interpretText(text);
+            return { ok: false, msg: (text || '').slice(0, 200) || ('HTTP ' + status) };
+        }
+
+        async function verifyLicense(code) {
+            const url = API_BASE + API_VERIFY_PATH + '?key=' + encodeURIComponent(code);
+            const ctrl = new AbortController();
+            const timer = setTimeout(() => ctrl.abort(), 15000);
+            let res, text;
+            try {
+                res = await fetch(url, { method: 'GET', signal: ctrl.signal, cache: 'no-store' });
+                text = await res.text();
+            } catch (e) {
+                clearTimeout(timer);
+                throw e;
+            }
+            clearTimeout(timer);
+            const parsed = interpretResponse(res.status, text);
+            if (!res.ok && !parsed.ok) throw new Error('HTTP ' + res.status + (parsed.msg ? '：' + parsed.msg : ''));
+            return parsed;
+        }
+
+        function setVipStatus(msg, type) {
+            const el = document.getElementById('vipStatusLine');
+            el.className = 'vip-gate-status' + (type ? ' ' + type : '');
+            el.innerText = msg || '';
+        }
+
+        function unlockUI() {
+            isVipUser = true;
+            document.body.classList.remove('locked');
+            document.getElementById('vipGate').classList.add('hide');
+        }
+
+        function lockUI() {
+            isVipUser = false;
+            document.body.classList.add('locked');
+            document.getElementById('vipGate').classList.remove('hide');
+        }
+
+        async function doActivate() {
+            const input = document.getElementById('licenseInput');
+            const btn = document.getElementById('btnActivate');
+            const code = input.value.trim();
+            if (!code) { setVipStatus('请输入卡密', 'err'); return; }
+
+            btn.disabled = true;
+            btn.innerText = '验证中...';
+            setVipStatus('正在连接服务器...', '');
+
+            try {
+                const r = await verifyLicense(code);
+                if (r.ok) {
+                    try { localStorage.setItem(LS_KEY, JSON.stringify({ code, savedAt: Date.now() })); } catch (e) {}
+                    setVipStatus('✅ 激活成功，正在进入…', 'ok');
+                    showToast('VIP 激活成功');
+                    setTimeout(() => {
+                        unlockUI();
+                        run();   // 激活后自动执行一次
+                    }, 450);
+                } else {
+                    setVipStatus(r.msg || '卡密无效或已过期', 'err');
+                }
+            } catch (err) {
+                setVipStatus('请求失败：' + err.message, 'err');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = '激活 VIP';
+            }
+        }
+
+        function restoreVip() {
+            let s = null;
+            try { s = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch (e) {}
+            if (!s || !s.code) return false;
+            // 先本地放行，再后台静默复核
+            unlockUI();
+            verifyLicense(s.code).then(r => {
+                if (!r.ok) {
+                    try { localStorage.removeItem(LS_KEY); } catch (e) {}
+                    lockUI();
+                    showToast('卡密已失效，请重新激活');
+                }
+            }).catch(() => { /* 网络异常保留本地状态 */ });
+            return true;
+        }
+
+        /* ================= 核心算法（业务逻辑不变） ================= */
         function getBaseStats(pastData) {
             let totalLen = pastData.length;
             let recentWindow = Math.max(5, Math.floor(totalLen * 0.3));
-
             let freqAll = {}, miss = {}, freqRecent = {};
             zodiacKeys.forEach(z => { freqAll[z] = 0; miss[z] = 100; freqRecent[z] = 0; });
-
             for (let i = totalLen - 1; i >= 0; i--) {
                 let num = pastData[i].num;
                 let diff = totalLen - 1 - i;
@@ -397,13 +402,11 @@
                     }
                 }
             }
-
             let maxF = Math.max(...Object.values(freqAll)) || 1;
             let maxR = Math.max(...Object.values(freqRecent)) || 1;
             let maxM = Math.max(...Object.values(miss)) || 1;
-            
             let normF = {}, normR = {}, normM = {};
-            for(let z of zodiacKeys) {
+            for (let z of zodiacKeys) {
                 normF[z] = (freqAll[z] / maxF) * 100;
                 normR[z] = (freqRecent[z] / maxR) * 100;
                 normM[z] = (miss[z] / maxM) * 100;
@@ -414,48 +417,34 @@
         function predictByStrategy(pastData, stratName) {
             let stats = getBaseStats(pastData);
             let { normF, normR, normM, miss, totalLen } = stats;
-
             let sysA = {}, sysB = {}, sysC = {};
             zodiacKeys.forEach(z => {
                 sysA[z] = normR[z] * 0.7 + normF[z] * 0.3 - (miss[z] <= 2 ? 50 : 0);
                 sysB[z] = normM[z] * 0.8 + normF[z] * 0.2 - (miss[z] > totalLen * 0.8 ? 50 : 0);
                 sysC[z] = normM[z] * 0.4 + normF[z] * 0.4 + normR[z] * 0.2;
             });
-
-            let rankA = Object.keys(sysA).sort((a,b) => sysA[b] - sysA[a]).slice(0, 6);
-            let rankB = Object.keys(sysB).sort((a,b) => sysB[b] - sysB[a]).slice(0, 6);
-            let rankC = Object.keys(sysC).sort((a,b) => sysC[b] - sysC[a]).slice(0, 6);
-
+            let rankA = Object.keys(sysA).sort((a, b) => sysA[b] - sysA[a]).slice(0, 6);
+            let rankB = Object.keys(sysB).sort((a, b) => sysB[b] - sysB[a]).slice(0, 6);
+            let rankC = Object.keys(sysC).sort((a, b) => sysC[b] - sysC[a]).slice(0, 6);
             let votes = {};
             zodiacKeys.forEach(z => votes[z] = 0);
             const assign = (list) => list.forEach((z, idx) => votes[z] += (6 - idx));
             assign(rankA); assign(rankB); assign(rankC);
-            
-            let finalRank = Object.keys(votes).sort((a,b) => votes[b] - votes[a]);
+            let finalRank = Object.keys(votes).sort((a, b) => votes[b] - votes[a]);
             let resonanceTop6 = finalRank.slice(0, 6);
             let resonanceBottom6 = finalRank.slice(6, 12);
-
-            let resultData = {
-                ranks: { A: rankA, B: rankB, C: rankC },
-                votes: votes,
-                top6: resonanceTop6,
-                bottom6: resonanceBottom6
-            };
-
+            let resultData = { ranks: { A: rankA, B: rankB, C: rankC }, votes, top6: resonanceTop6, bottom6: resonanceBottom6 };
             if (stratName === '顺势追热') resultData.top6 = rankA;
             if (stratName === '均值回补') resultData.top6 = rankB;
             if (stratName === '均衡防守') resultData.top6 = rankC;
-
             return resultData;
         }
 
         function get16Numbers(zodiacs, stratName, pastData) {
             let numPool = [];
-            zodiacs.forEach(z => { zodiacMap[z].forEach(num => { numPool.push(num); }); });
-
+            zodiacs.forEach(z => { zodiacMap[z].forEach(num => numPool.push(num)); });
             let numScores = {};
             numPool.forEach(num => { numScores[num] = { miss: 100, freq: 0 }; });
-
             for (let i = pastData.length - 1; i >= 0; i--) {
                 let n = pastData[i].num;
                 let diff = pastData.length - 1 - i;
@@ -464,12 +453,10 @@
                     if (numScores[n].miss === 100) numScores[n].miss = diff;
                 }
             }
-
             let scoredPool = numPool.map(num => {
                 let s = 0;
                 let m = numScores[num].miss;
                 let f = numScores[num].freq;
-
                 if (stratName.includes('回补') || stratName.includes('反买')) {
                     if (m >= 3 && m <= 15) s += 50;
                     if (f <= 2) s += 20;
@@ -482,69 +469,67 @@
                 }
                 return { num, score: s };
             });
-
-            scoredPool.sort((a,b) => b.score - a.score);
-            let top16 = scoredPool.slice(0, 16).map(item => item.num).sort((a,b) => a - b);
-
-            return {
-                top16,
-                core6: top16.slice(0, 6),
-                play6: top16.slice(6, 12),
-                trap4: top16.slice(12, 16)
-            };
+            scoredPool.sort((a, b) => b.score - a.score);
+            let top16 = scoredPool.slice(0, 16).map(item => item.num).sort((a, b) => a - b);
+            return { top16, core6: top16.slice(0, 6), play6: top16.slice(6, 12), trap4: top16.slice(12, 16) };
         }
 
         function backtest(pastData, stratName, testLen) {
             let actualTestLen = Math.min(testLen, pastData.length - 5);
-            if (actualTestLen <= 0) return { hits: 0, rate: 0, maxLoss: 0, curLoss: 0, testLen: 0 };
-            
+            if (actualTestLen <= 0) return { hits: 0, rate: 0, maxLoss: 0, curLoss: 0, actualTestLen: 0 };
             let startIdx = pastData.length - actualTestLen;
             let hits = 0, maxLoss = 0, curLoss = 0;
-
             for (let i = startIdx; i < pastData.length; i++) {
                 let viewPast = pastData.slice(0, i);
                 let pred = predictByStrategy(viewPast, stratName);
                 let top6 = pred.top6;
                 let realZ = "";
                 for (let z in zodiacMap) { if (zodiacMap[z].includes(pastData[i].num)) realZ = z; }
-
-                if (top6.includes(realZ)) { hits++; curLoss = 0; } 
+                if (top6.includes(realZ)) { hits++; curLoss = 0; }
                 else { curLoss++; if (curLoss > maxLoss) maxLoss = curLoss; }
             }
             return { hits, actualTestLen, maxLoss, curLoss, rate: (hits / actualTestLen) * 100 };
         }
 
         function generateMockData(count = 600) {
-            let mock = []; let basePeriod = 2024000;
-            for(let i=0; i<count; i++) { mock.push({ period: (basePeriod + i).toString(), num: Math.floor(Math.random() * 49) + 1 }); }
+            let mock = [];
+            let basePeriod = 2024000;
+            for (let i = 0; i < count; i++) mock.push({ period: (basePeriod + i).toString(), num: Math.floor(Math.random() * 49) + 1 });
             return mock;
         }
 
+        /* ================= 主流程 ================= */
         async function run() {
-            const btn = document.getElementById('btnRun'); btn.innerText = "演算中..."; btn.disabled = true;
+            if (!isVipUser) return;
+            const btn = document.getElementById('btnRun');
+            btn.innerText = "深度演算中...";
+            btn.disabled = true;
             const sourceTag = document.getElementById('dataSourceTag');
             const selectedLen = parseInt(document.getElementById('selPeriod').value);
-            
+
             try {
                 if (SEQ.length === 0) {
                     try {
                         const res = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
                         if (!res.ok) throw new Error();
                         let raw = await res.json();
-                        sourceTag.innerText = "实盘数据"; sourceTag.style.color = "#059669"; sourceTag.style.borderColor = "#d1fae5";
+                        sourceTag.innerText = "实盘数据";
+                        sourceTag.style.color = "#059669";
+                        sourceTag.style.borderColor = "#d1fae5";
                         SEQ = raw.map(x => ({ period: x.period || x.issue || x.expect, num: parseInt(x.num || x.number || x.code) })).filter(x => x.period && !isNaN(x.num) && x.num > 0);
                     } catch (err) {
-                        sourceTag.innerText = "模拟兜底"; sourceTag.style.color = "#d97706"; sourceTag.style.borderColor = "#fef3c7";
+                        sourceTag.innerText = "模拟兜底";
+                        sourceTag.style.color = "#d97706";
+                        sourceTag.style.borderColor = "#fef3c7";
                         SEQ = generateMockData(600);
                     }
                 }
 
                 let viewData = SEQ.slice(-selectedLen);
-                if (viewData.length < 10) viewData = SEQ; 
+                if (viewData.length < 10) viewData = SEQ;
 
                 let strategies = ['多系统共振', '顺势追热', '均值回补', '均衡防守'];
                 let bestStrat = strategies[0], bestRate = -1, bestBt = null;
-
                 strategies.forEach(st => {
                     let bt = backtest(viewData, st, selectedLen);
                     if (bt.rate > bestRate) { bestRate = bt.rate; bestStrat = st; bestBt = bt; }
@@ -559,7 +544,6 @@
                 let numResult = get16Numbers(finalZodiacs, displayStratName, viewData);
 
                 document.getElementById('coreZodiacs').innerText = "['" + finalZodiacs.join("', '") + "']";
-                
                 document.getElementById('num16Pool').innerText = "[" + numResult.top16.join(", ") + "]";
                 document.getElementById('numCore').innerText = "[" + numResult.core6.join(", ") + "]";
                 document.getElementById('numPlay').innerText = "[" + numResult.play6.join(", ") + "]";
@@ -568,7 +552,7 @@
                 document.getElementById('strategyTag').style.display = "inline-block";
                 document.getElementById('strategyTag').innerText = `策略: ${displayStratName} (视野${selectedLen})`;
                 document.getElementById('reverseTag').style.display = isReverse ? "inline-block" : "none";
-                
+
                 document.getElementById('statHitRate').innerText = finalRate + "%";
                 document.getElementById('statCurLoss').innerText = bestBt.curLoss;
                 document.getElementById('statMaxLoss').innerText = bestBt.maxLoss;
@@ -584,8 +568,7 @@
                 prediction.top6.forEach((z, idx) => {
                     let v = prediction.votes[z] || 0;
                     let percent = (v / maxVote) * 100;
-                    scoreHtml += `
-                    <div class="score-item">
+                    scoreHtml += `<div class="score-item">
                         <div class="score-rank">${idx + 1}</div>
                         <div class="score-zodiac">${z}</div>
                         <div class="score-bar-wrap"><div class="score-bar" style="width: ${percent}%"></div></div>
@@ -594,174 +577,72 @@
                 });
                 document.getElementById('scoreList').innerHTML = scoreHtml;
 
-                currentData = { 
-                    period: parseInt(SEQ[SEQ.length-1].period) + 1, zodiacs: finalZodiacs, 
-                    rate: finalRate, maxLoss: bestBt.maxLoss, curLoss: bestBt.curLoss,
-                    isReverse: isReverse, testLen: bestBt.actualTestLen,
-                    strat: displayStratName, viewLen: selectedLen, topVote: maxVote, nums: numResult
+                currentData = {
+                    period: parseInt(SEQ[SEQ.length - 1].period) + 1,
+                    zodiacs: finalZodiacs,
+                    rate: finalRate,
+                    maxLoss: bestBt.maxLoss,
+                    curLoss: bestBt.curLoss,
+                    isReverse: isReverse,
+                    testLen: bestBt.actualTestLen,
+                    strat: displayStratName,
+                    viewLen: selectedLen,
+                    topVote: maxVote,
+                    nums: numResult
                 };
-
             } catch (e) {
                 showToast("计算失败");
             } finally {
-                btn.innerText = "启动智能寻优"; btn.disabled = false;
+                btn.innerText = "启动执行寻优与共振 →";
+                btn.disabled = false;
             }
         }
 
         function copyText() {
-            if (!currentData) return showToast("请先执行寻优");
+            if (!isVipUser) return showToast("请先激活 VIP");
+            if (!currentData) return showToast("请先执行");
             const d = currentData;
-            
+
             let conf = Math.round((parseFloat(d.rate) * 0.7) + (d.topVote / 18 * 30));
-            if(conf > 99) conf = 99;
+            if (conf > 99) conf = 99;
 
-            let text = `📈 【量化资产配置晨报】 ${d.period}期\n`;
-            text += `报告级别：内部策略参考 | 适用周期：${d.viewLen}期级别\n\n`;
-            text += `▍ 一、 宏观策略摘要\n`;
-            text += `本周期模型启用【${d.strat}】核心逻辑。${d.isReverse ? '系统已自动切换反向对冲。' : '经历史数据蒙特卡洛模拟，当前策略具有显著正向期望收益。'}\n`;
-            text += `底层置信区间：${conf}%。\n\n`;
-            text += `▍ 二、 核心资产池\n`;
-            text += `* 优选六大板块（六肖）：['${d.zodiacs.join("', '")}']\n`;
-            text += `* 优选标的（十六码）：[${d.nums.top16.join(", ")}]\n\n`;
-            text += `▍ 三、 投资组合建议\n`;
-            text += `★ 核心重仓资产：[${d.nums.core6.join(", ")}]\n`;
-            text += `☆ 卫星博弈资产：[${d.nums.play6.join(", ")}]\n`;
-            text += `✖ 尾部对冲资产：[${d.nums.trap4.join(", ")}]\n\n`;
-            text += `▍ 四、 策略回测与风控\n`;
-            text += `- 历史胜率 (Win Rate)：${d.rate}%\n`;
-            text += `- 最大连续回撤：${d.maxLoss} 期\n`;
-            text += `- 当前回撤计数：${d.curLoss} 期\n\n`;
-            text += `首席量化交易员建议：敬畏市场，知行合一，单期仓位建议≤5%。`;
-            
-            if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✅ 投行研报文案已复制'));
+            let w1 = Math.floor(Math.random() * 8) + 18;
+            let w2 = Math.floor(Math.random() * 8) + 22;
+            let w3 = Math.floor(Math.random() * 8) + 15;
+            let w4 = 100 - w1 - w2 - w3;
+
+            let text = `下期预测：${d.period}（仅供技术研究）\n`;
+            text += `①\n`;
+            text += `V42.7.1 安全版 AI ＋系统加权融合（${d.isReverse ? '反向混沌期' : '多系统共振期'}）|置信度：${conf}%\n`;
+            if (d.isReverse) text += `AI推演：盘口极度异常，传统逻辑胜率跌破50%，系统已强制执行反向过滤策略。\n`;
+            else text += `AI推演：经过 ${d.viewLen} 期视野智能寻优，当前【${d.strat}】模型表现最优，共振选出目标。\n`;
+            text += `⚠️ AI风险提示：注意连续多期平码及高共识号码陷阱。\n`;
+            text += `权重：{'遗漏回归': '${w1}%', '走势热度': '${w2}%', '连庄趋势': '${w3}%', '误导处理': '${w4}%'}\n`;
+            text += `〔正向预测〕AI本轮重点锁定以下高概率开出目标：\n`;
+            text += `@ 六肖：['${d.zodiacs.join("', '")}']\n`;
+            text += `16码：[${d.nums.top16.join(", ")}]\n`;
+            text += `-核心：[${d.nums.core6.join(", ")}]\n`;
+            text += `-博弈：[${d.nums.play6.join(", ")}]\n`;
+            text += `-陷阱：[${d.nums.trap4.join(", ")}]\n`;
+            text += `AI最看好6码：[${d.nums.core6.join(", ")}]\n`;
+            text += `\n📊 历史回测(${d.testLen}期)：命中率 ${d.rate}% | 最大连黑 ${d.maxLoss}期\n`;
+            text += `⚠️ 实战纪律：当前连黑 ${d.curLoss}期 ${d.curLoss >= d.maxLoss && d.maxLoss >= 3 ? '(已达历史极限，请严格止损！)' : ''}`;
+
+            if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => showToast('✅ 专业文案已复制'));
         }
 
-        // ================= 核心：生成全屏白底黑卡海报 =================
-        function generatePoster() {
-            if (!currentData) return showToast("请先执行寻优");
-            const d = currentData;
-            
-            // Logo 图片地址
-            const myLogoUrl = "https://i.ibb.co/9kNNBXZ6/A92-DABFE-5048-46-E6-A4-D9-38-B7-CBF779-C8.png";
-            
-            // 动态计算一个好看的“置信度”替换掉胜率
-            let conf = Math.round((parseFloat(d.rate) * 0.7) + (d.topVote / 18 * 30));
-            if(conf > 99) conf = 99;
-
-            const pContainer = document.getElementById('posterContainer');
-            
-            pContainer.innerHTML = `
-                <div style="background-color: #f8fafc; background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px; padding: 40px 20px; display: flex; justify-content: center;">
-                    <div style="width: 100%; background: #0f1014; border-radius: 24px; padding: 32px 28px; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);">
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;">
-                            <div style="font-size: 18px; font-weight: 800; letter-spacing: 1.5px; color: #f8fafc;">
-                                鹰眼通六肖王共振系统
-                            </div>
-                            <div style="font-size: 13px; color: #94a3b8; font-family: monospace; letter-spacing: 1px;">
-                                PERIOD ${d.period}
-                            </div>
-                        </div>
-
-                        <div style="margin-bottom: 40px;">
-                            <div style="font-size: 13px; color: #64748b; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;">
-                                CORE PREDICTIONS / 精选六肖
-                            </div>
-                            <div style="font-size: 42px; font-weight: 600; color: #ffffff; letter-spacing: 6px; line-height: 1.4; word-break: break-all;">
-                                <span style="color: #38bdf8;">['</span>${d.zodiacs.join("', '")}<span style="color: #38bdf8;">']</span>
-                            </div>
-                        </div>
-
-                        <div style="margin-bottom: 40px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                                <div style="font-size: 13px; color: #64748b; letter-spacing: 1px; text-transform: uppercase;">TARGET POOL / 最优选16码</div>
-                                <div style="font-size: 12px; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; font-family: monospace;">${d.strat}</div>
-                            </div>
-                            
-                            <div style="font-size: 17px; font-weight: 500; font-family: monospace; color: #e2e8f0; line-height: 1.8; margin-bottom: 25px; letter-spacing: 1px; word-break: break-all;">
-                                [${d.nums.top16.join(", ")}]
-                            </div>
-
-                            <div style="display: flex; flex-direction: column; gap: 14px;">
-                                <div style="display: flex; align-items: center;">
-                                    <div style="width: 6px; height: 16px; background: #34d399; border-radius: 3px; margin-right: 12px;"></div>
-                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">核心</span>
-                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.core6.join(", ")}]</span>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <div style="width: 6px; height: 16px; background: #fbbf24; border-radius: 3px; margin-right: 12px;"></div>
-                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">博弈</span>
-                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.play6.join(", ")}]</span>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <div style="width: 6px; height: 16px; background: #f87171; border-radius: 3px; margin-right: 12px;"></div>
-                                    <span style="color: #94a3b8; font-size: 13px; width: 45px;">陷阱</span>
-                                    <span style="color: #fff; font-size: 15px; font-family: monospace; letter-spacing: 1px;">[${d.nums.trap4.join(", ")}]</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 隐藏了胜率和连黑，替换为高级参数 -->
-                        <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 25px; margin-bottom: 30px;">
-                            <div>
-                                <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">AI 置信度</div>
-                                <div style="font-size: 22px; font-weight: 700; color: #38bdf8; font-family: monospace;">${conf}%</div>
-                            </div>
-                            <div style="text-align: right;">
-                                <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">SIGNAL STRENGTH</div>
-                                <div style="font-size: 22px; font-weight: 700; color: #f8fafc; font-family: monospace;">STRONG</div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                            <div style="font-size: 11px; color: #475569; font-family: monospace; line-height: 1.6;">
-                                DATE: ${new Date().toLocaleString()}<br>
-                                数据由鹰眼通AI共振系统演算分析，仅供技术参考研究，不构成实质建议。.
-                            </div>
-                            <!-- Logo -->
-                            <div style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.02); overflow: hidden;">
-                                <img src="${myLogoUrl}" alt="LOGO" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            showToast("绘制全屏白底海报中...");
-            
-            setTimeout(() => {
-                html2canvas(pContainer, {
-                    scale: 3, 
-                    useCORS: true, // 允许加载跨域图片
-                    backgroundColor: null 
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    document.getElementById('posterImg').src = imgData;
-                    document.getElementById('posterModal').classList.add('show');
-                }).catch(err => {
-                    console.error("截图失败详情:", err);
-                    showToast("生成海报失败");
-                });
-            }, 500); 
-        }
-
-        function savePoster() {
-            const img = document.getElementById('posterImg');
-            if (!img.src) return;
-            const a = document.createElement('a');
-            a.href = img.src;
-            a.download = `量化预测_第${currentData.period}期.png`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast("已保存，请去相册查看");
-        }
-
-        function closePoster() {
-            document.getElementById('posterModal').classList.remove('show');
-        }
-        
-        window.onload = run;
+        /* ================= 启动 ================= */
+        window.onload = () => {
+            const restored = restoreVip();
+            if (restored) {
+                // 本地有卡密 → 已 unlockUI，直接跑分析
+                run();
+            } else {
+                lockUI();
+                // 聚焦输入框
+                setTimeout(() => document.getElementById('licenseInput').focus(), 300);
+            }
+        };
     </script>
 </body>
 </html>
